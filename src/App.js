@@ -6,6 +6,9 @@ import { TodoItem } from './components/todoitem';
 import { TodoCounter } from './components/todocounter';
 import { TodoList } from './components/todolist';
 import { TodoBox } from './components/todobox';
+import { TodoHeader } from "./components/todoheader";
+
+const bgUrl = "https://static.vecteezy.com/system/resources/previews/001/557/683/original/abstract-overlapping-blue-background-free-vector.jpg"
 
 function useLocalStorage (itemName, initialValue, defaultLayout) {
   const localStorageItem = localStorage.getItem(itemName)
@@ -29,7 +32,7 @@ function useLocalStorage (itemName, initialValue, defaultLayout) {
 } 
 
 const defaultTodos = [ {text: "Crear primer TODO", completed: false},
-  {text: "Responsive", completed: false}]
+  {text: "Borrar TODO de muestra", completed: false}]
 
 function App() {
 
@@ -86,25 +89,28 @@ function App() {
   }
 
   return (
-    <div className="app relative bg-gradient-to-r from-sky-500 to-indigo-500  w-screen h-screen grid">
-
+    <div className="app flex items-center bg-cover h-screen w-screen" style={{ 
+      backgroundImage: `url(${bgUrl})` 
+    }}>
     <TodoBox>
-      <TodoCounter completed={completedTodos} total={totalTodos}/>
-      <TodoNav searchValue={searchValue} setSearchValue={setSearchValue}/>
-      <TodoList>
-        {search.map(todo => (
-          <TodoItem
-          key={todo.text}
-          text={todo.text}
-          completed={todo.completed}
-          onComplete={() => CompleteTodo(todo.text)}
-          onDelete={() => DeleteTodo(todo.text)}
-          onEdit={(text, newInput) => EditTodo(todo.text, newInput)}>
-          </TodoItem>
-        ))}
-      </TodoList>
-      <CreateTodoButton 
-      onCreate={(text) => CreateTodo(text)}/>
+      <TodoHeader>
+        <TodoCounter completed={completedTodos} total={totalTodos}/>
+        <TodoNav searchValue={searchValue} setSearchValue={setSearchValue}/>
+      </TodoHeader>
+        <TodoList>
+          {search.map(todo => (
+            <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => CompleteTodo(todo.text)}
+            onDelete={() => DeleteTodo(todo.text)}
+            onEdit={(text, newInput) => EditTodo(todo.text, newInput)}>
+            </TodoItem>
+          ))}
+        </TodoList>
+        <CreateTodoButton 
+        onCreate={(text) => CreateTodo(text)}/>
     </TodoBox>
     </div>
   );

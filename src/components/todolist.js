@@ -1,6 +1,6 @@
 export function TodoList(props) {
     return (
-        <ul className="overflow-y-auto h-3/4">
+        <ul className="h-5/6 relative overflow-auto no-scrollbar">
             {props.children}
         </ul>
     )

@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+    @variants responsive {
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+    }
+  }
 
 body {
   margin: 0;
@@ -16,3 +27,32 @@ code {
     monospace;
 }
 
+/* En tu archivo de estilos CSS */
+.completed-animation {
+  background-color: #4CAF50; /* Color verde */
+  animation: fadeInBackground 0.1s ease-in-out; /* Animación de transición */
+}
+
+@keyframes fadeInBackground {
+  0% {
+    background-color: transparent; /* Inicio transparente */
+  }
+  100% {
+    background-color: #4CAF50; /* Final con el color verde */
+    border-color: #4CAF50;
+  }
+}
+
+.decompleted-animation {
+  background-color: #ffffff;
+  animation: fadeOutBackground 0.1s ease-in-out;
+}
+
+@keyframes fadeOutBackground {
+  0% {
+    background-color: #4CAF50;
+  }
+  100% {
+    background-color: #ffffff;
+  }
+}
